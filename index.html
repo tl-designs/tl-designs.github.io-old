@@ -1,27 +1,18 @@
-<html>
-<head>
-<title> tl-designs: Design + Development </title>
-<link rel="stylesheet" type="text/css" href="theme.css">”https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css”/> 
-<style>
-h1{ color:light blue;
-    font-family:didot;
-}
-h3{ color:gray;
-    font-family:didot;
-}
-nav{
-color:tan;
-font-family:didot;
-}
-</style>
-</head>
-<body>
-<h1> tl-designs: Design + Development </h1>
-<h3> Welcome! I’m Lily. A designer and developer based in Chicago, IL.</h3>
-<nav> 
-<ul>Folio</ul>
-<ul>About Me</ul>
-<ul>Blog</ul>
-</nav>
-</body>
-</html>
+---
+layout: default
+section: blog
+---
+
+<div class='listing col6 pad4h margin3'>
+  {% for item in site.categories.blog limit:1000 %}
+    {% capture date %}{{ item.date | date: '%B %Y' }}{% endcapture %}
+    {% capture ndate %}{{ item.next.date | date: '%B %Y' }}{% endcapture %}
+
+    {% if date != ndate %}
+      <h4 class='month'>{{item.date | date: '%B %Y'}}</h4>
+    {% endif %}
+    <a class='item' href='{{site.baseurl}}{{item.url}}'>{{item.title}} <span class='date'>&#126; {{item.date | date:"%b %d"}}</span></a>
+  {% endfor %}
+</div>
+
+{% include rss-link.html %}
